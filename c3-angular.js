@@ -1,6 +1,6 @@
-/*! c3-angular - v1.3.1 - 2016-08-04
+/*! c3-angular - v1.3.1 - 2017-09-06
 * https://github.com/jettro/c3-angular-directive
-* Copyright (c) 2016 ; Licensed  */
+* Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
 angular.module('gridshore.c3js.chart')
     .directive('chartAxes', ChartAxes);
@@ -194,42 +194,48 @@ angular.module('gridshore.c3js.chart')
  *   </chart-axis>
  */
 
-function ChartAxisX () {
-    var axisLinker = function (scope, element, attrs, chartCtrl) {
+function ChartAxisX() {
+    var axisLinker = function(scope, element, attrs, chartCtrl) {
         var position = attrs.axisPosition;
         var label = attrs.axisLabel;
 
-        var axis = {"label": {"text": label, "position": position}};
+        var axis = { "label": { "text": label, "position": position } };
 
         var paddingLeft = attrs.paddingLeft;
         var paddingRight = attrs.paddingRight;
         if (paddingLeft || paddingRight) {
             paddingLeft = (paddingLeft) ? paddingLeft : 0;
             paddingRight = (paddingRight) ? paddingRight : 0;
-            axis.padding = {"left": parseInt(paddingLeft), "right": parseInt(paddingRight)};
+            axis.padding = { "left": parseInt(paddingLeft), "right": parseInt(paddingRight) };
         }
-        var height=attrs.axisHeight;
+        var height = attrs.axisHeight;
         if (height) {
             axis.height = parseInt(height);
         }
-        
+        var rotate = attrs.axisRotate;
+        if (rotate != '') {
+            axis.tick = {
+                rotate: parseInt(rotate),
+                multiline: false
+            }
+        }
         if (attrs.show === 'false') {
             axis.show = false;
         }
         if (attrs.axisLocaltime === 'true') {
-            axis.localtime=true;
+            axis.localtime = true;
         }
-        var max=attrs.axisMax;
+        var max = attrs.axisMax;
         if (max) {
-            axis.max=max;
+            axis.max = max;
         }
-        var min=attrs.axisMin;
+        var min = attrs.axisMin;
         if (min) {
-            axis.min=min;
+            axis.min = min;
         }
-        var type=attrs.axisType;
+        var type = attrs.axisType;
         if (type) {
-            axis.type=type;   
+            axis.type = type;
         }
         chartCtrl.addAxisProperties('x', axis);
 
@@ -693,7 +699,7 @@ angular.module('gridshore.c3js.chart')
  */
 
 function ChartBar() {
-    var barLinker = function (scope, element, attrs, chartCtrl) {
+    var barLinker = function(scope, element, attrs, chartCtrl) {
         var bar = {};
         if (attrs.width) {
             bar.width = parseInt(attrs.width);
@@ -850,8 +856,8 @@ angular.module('gridshore.c3js.chart')
  *       $scope.theChart.flush();
  *   };
  */
-function C3Chart ($timeout) {
-    var chartLinker = function (scope, element, attrs, chartCtrl) {
+function C3Chart($timeout) {
+    var chartLinker = function(scope, element, attrs, chartCtrl) {
         var paddingTop = attrs.paddingTop;
         var paddingRight = attrs.paddingRight;
         var paddingBottom = attrs.paddingBottom;
@@ -881,9 +887,9 @@ function C3Chart ($timeout) {
         if (attrs.onZoomEndFunction) {
             chartCtrl.addOnZoomEndFunction(scope.onZoomEndFunction());
         }
-        if (attrs.subchartOnBrushFunction){
-          chartCtrl.addSubchartOnBrushFunction(scope.subchartOnBrushFunction());          
-        }         
+        if (attrs.subchartOnBrushFunction) {
+            chartCtrl.addSubchartOnBrushFunction(scope.subchartOnBrushFunction());
+        }
         if (attrs.callbackFunction) {
             chartCtrl.addChartCallbackFunction(scope.callbackFunction());
         }
@@ -894,7 +900,7 @@ function C3Chart ($timeout) {
             chartCtrl.addInitialConfig(initialConfig);
         }
         // Trick to wait for all rendering of the DOM to be finished.
-        $timeout(function () {
+        $timeout(function() {
             chartCtrl.showGraph();
         });
     };
@@ -903,10 +909,13 @@ function C3Chart ($timeout) {
         "restrict": "E",
         "controller": "ChartController",
         "scope": {
+            "subtitle": "@subtitle",
+            "title": "@graphTitle",
+            "callout": "@callOut",
             "bindto": "@bindtoId",
             "showLabels": "@showLabels",
             "labelsFormatFunction": "&",
-            "onZoomEndFunction": "&",            
+            "onZoomEndFunction": "&",
             "showSubchart": "@showSubchart",
             "subchartOnBrushFunction": "&",
             "enableZoom": "@enableZoom",
@@ -916,13 +925,32 @@ function C3Chart ($timeout) {
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },
-        "template": "<div><div id='{{bindto}}'></div><div ng-transclude></div></div>",
+        "template": '<div class="portlet">' +
+            '<div class="portlet-heading">' +
+            '<h3 class="portlet-title text-dark"> {{ title }}</h3>' +
+            '<h5 class="tooltip-show-container text-warning">' +
+            '<div class="portlet-sub-title info-icon-c tool-wrapper tooltio_show_hide">' +
+            '<i class="fa fa-info-circle" aria-hidden="true"></i>' +
+            '</div>' +
+            '<div class="tooltip" ng-bind-html="subtitle"></div>' +
+            '</h5>' +
+            '</div>' +
+            '<div id="bg-default1" class="panel-collapse collapse in">' +
+            '<div class="portlet-body">' +
+            '<h5 class="text-dark total-pageview"> {{callout}}</h5>' +
+            '<div class="text-center" ng-show="showLegend">' +
+            '</div>' +
+            '<div><div id="{{bindto}}"></div><div ng-transclude></div></div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '',
         "replace": true,
         "transclude": true,
         "link": chartLinker
     };
 }
-
 angular.module('gridshore.c3js.chart')
     .directive('chartColors', ChartColors);
 

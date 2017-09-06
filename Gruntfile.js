@@ -1,21 +1,21 @@
 'use strict';
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     grunt.initConfig({
-        pkg:grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('package.json'),
         banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+            '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+            '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
+            '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+            ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
         watch: {
             js: {
                 files: '<%= jshint.all %>',
-                tasks: ['combine','copy:examples']
+                tasks: ['combine', 'copy:examples']
             },
             docs: {
                 files: '<%= jshint.all %>',
-                tasks: ['jsdoc']                
+                tasks: ['jsdoc']
             }
         },
         concat: {
@@ -26,7 +26,7 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     'src/*.js'
-                    ],
+                ],
                 dest: '<%= pkg.name %>.js'
             }
         },
@@ -55,41 +55,41 @@ module.exports = function (grunt) {
         copy: {
             examples: {
                 files: [
-                    {expand: true, flatten: true, src: ['bower_components/angular/angular.min.js'], dest: 'examples/assets/js/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['bower_components/angular/angular.min.js.map'], dest: 'examples/assets/js/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['bower_components/d3/d3.min.js'], dest: 'examples/assets/js/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['bower_components/c3/c3.min.js'], dest: 'examples/assets/js/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['bower_components/c3/c3.min.css'], dest: 'examples/assets/css/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['c3-angular.js'], dest: 'examples/assets/js/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['c3-angular.min.js'], dest: 'examples/assets/js/', filter: 'isFile'},
-                    {expand: true, flatten: true, src: ['c3-angular.min.js.map'], dest: 'examples/assets/js/', filter: 'isFile'}
+                    { expand: true, flatten: true, src: ['bower_components/angular/angular.min.js'], dest: 'examples/assets/js/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['bower_components/angular/angular.min.js.map'], dest: 'examples/assets/js/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['bower_components/d3/d3.min.js'], dest: 'examples/assets/js/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['bower_components/c3/c3.min.js'], dest: 'examples/assets/js/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['bower_components/c3/c3.min.css'], dest: 'examples/assets/css/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['c3-angular.js'], dest: 'examples/assets/js/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['c3-angular.min.js'], dest: 'examples/assets/js/', filter: 'isFile' },
+                    { expand: true, flatten: true, src: ['c3-angular.min.js.map'], dest: 'examples/assets/js/', filter: 'isFile' }
                 ]
             },
             bysource: {
                 files: [
-                    {expand: true, flatten: true, src: ['c3-angular.js'], dest: 'examples/assets/js/', filter: 'isFile'}
-                ]  
+                    { expand: true, flatten: true, src: ['c3-angular.js'], dest: 'examples/assets/js/', filter: 'isFile' }
+                ]
             }
         },
         devserver: {
             options: {
                 base: 'examples',
-                port:8000
+                port: 8000
             },
             server: {}
         },
-      jsdoc : {
-        dist: {
-          src: [
-            'src/**/*.js'
-          ], 
-          options: {
-            destination: 'docs',
-            configure: 'node_modules/angular-jsdoc/conf.json',
-            template: 'node_modules/angular-jsdoc/template'
-          }
+        jsdoc: {
+            dist: {
+                src: [
+                    'src/**/*.js'
+                ],
+                options: {
+                    destination: 'docs',
+                    configure: 'node_modules/angular-jsdoc/conf.json',
+                    template: 'node_modules/angular-jsdoc/template'
+                }
+            }
         }
-      }        
     });
 
     grunt.loadNpmTasks('grunt-contrib-concat');
@@ -100,5 +100,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-devserver');
     grunt.loadNpmTasks('grunt-jsdoc');
 
-    grunt.registerTask('combine',['concat:dist','uglify:dist','copy:examples']);
+    grunt.registerTask('default', ['concat:dist', 'uglify:dist', 'copy:examples']);
 };

@@ -130,8 +130,8 @@ angular.module('gridshore.c3js.chart')
  *       $scope.theChart.flush();
  *   };
  */
-function C3Chart ($timeout) {
-    var chartLinker = function (scope, element, attrs, chartCtrl) {
+function C3Chart($timeout) {
+    var chartLinker = function(scope, element, attrs, chartCtrl) {
         var paddingTop = attrs.paddingTop;
         var paddingRight = attrs.paddingRight;
         var paddingBottom = attrs.paddingBottom;
@@ -161,9 +161,9 @@ function C3Chart ($timeout) {
         if (attrs.onZoomEndFunction) {
             chartCtrl.addOnZoomEndFunction(scope.onZoomEndFunction());
         }
-        if (attrs.subchartOnBrushFunction){
-          chartCtrl.addSubchartOnBrushFunction(scope.subchartOnBrushFunction());          
-        }         
+        if (attrs.subchartOnBrushFunction) {
+            chartCtrl.addSubchartOnBrushFunction(scope.subchartOnBrushFunction());
+        }
         if (attrs.callbackFunction) {
             chartCtrl.addChartCallbackFunction(scope.callbackFunction());
         }
@@ -174,7 +174,7 @@ function C3Chart ($timeout) {
             chartCtrl.addInitialConfig(initialConfig);
         }
         // Trick to wait for all rendering of the DOM to be finished.
-        $timeout(function () {
+        $timeout(function() {
             chartCtrl.showGraph();
         });
     };
@@ -183,10 +183,13 @@ function C3Chart ($timeout) {
         "restrict": "E",
         "controller": "ChartController",
         "scope": {
+            "subtitle": "@subtitle",
+            "title": "@graphTitle",
+            "callout": "@callOut",
             "bindto": "@bindtoId",
             "showLabels": "@showLabels",
             "labelsFormatFunction": "&",
-            "onZoomEndFunction": "&",            
+            "onZoomEndFunction": "&",
             "showSubchart": "@showSubchart",
             "subchartOnBrushFunction": "&",
             "enableZoom": "@enableZoom",
@@ -196,7 +199,27 @@ function C3Chart ($timeout) {
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },
-        "template": "<div><div id='{{bindto}}'></div><div ng-transclude></div></div>",
+        "template": '<div class="portlet">' +
+            '<div class="portlet-heading">' +
+            '<h3 class="portlet-title text-dark"> {{ title }}</h3>' +
+            '<h5 class="tooltip-show-container text-warning">' +
+            '<div class="portlet-sub-title info-icon-c tool-wrapper tooltio_show_hide">' +
+            '<i class="fa fa-info-circle" aria-hidden="true"></i>' +
+            '</div>' +
+            '<div class="tooltip" ng-bind-html="subtitle"></div>' +
+            '</h5>' +
+            '</div>' +
+            '<div id="bg-default1" class="panel-collapse collapse in">' +
+            '<div class="portlet-body">' +
+            '<h5 class="text-dark total-pageview"> {{callout}}</h5>' +
+            '<div class="text-center" ng-show="showLegend">' +
+            '</div>' +
+            '<div><div id="{{bindto}}"></div><div ng-transclude></div></div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '',
         "replace": true,
         "transclude": true,
         "link": chartLinker

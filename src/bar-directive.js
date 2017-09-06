@@ -32,7 +32,7 @@ angular.module('gridshore.c3js.chart')
  */
 
 function ChartBar() {
-    var barLinker = function (scope, element, attrs, chartCtrl) {
+    var barLinker = function(scope, element, attrs, chartCtrl) {
         var bar = {};
         if (attrs.width) {
             bar.width = parseInt(attrs.width);

@@ -1,4 +1,4 @@
-/*! c3-angular - v1.3.1 - 2017-09-06
+/*! c3-angular - v1.3.1 - 2017-09-14
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -709,6 +709,9 @@ function ChartBar() {
                 bar.width = {};
             }
             bar.width.ratio = parseFloat(attrs.ratio);
+        }
+        if (attrs.space) {
+            bar.space = parseFloat(attrs.space);
         }
         if (attrs.zerobased) {
             bar.zerobased = (attrs.zerobased === 'true');

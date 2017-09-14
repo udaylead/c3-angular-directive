@@ -43,6 +43,9 @@ function ChartBar() {
             }
             bar.width.ratio = parseFloat(attrs.ratio);
         }
+        if (attrs.space) {
+            bar.space = parseFloat(attrs.space);
+        }
         if (attrs.zerobased) {
             bar.zerobased = (attrs.zerobased === 'true');
         }

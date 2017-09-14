@@ -3,12 +3,13 @@
  * @description Controller for the c3js directive
  */
 angular.module('gridshore.c3js.chart')
-/**
- * @controller
- */
+    /**
+     * @controller
+     */
     .controller('ChartController', ChartController);
 
 ChartController.$inject = ['$scope', '$timeout'];
+
 function ChartController($scope, $timeout) {
     this.showGraph = showGraph;
 
@@ -39,7 +40,8 @@ function ChartController($scope, $timeout) {
     this.addYAxis = addYAxis;
     this.addYTick = addYTick;
     this.addYTickFormatFunction = addYTickFormatFunction;
-
+    this.addY2Tick = addY2Tick;
+    this.addY2TickFormatFunction = addY2TickFormatFunction;
     this.addXAxisValues = addXAxisValues;
     this.addXTick = addXTick;
     this.addXTickFormatFunction = addXTickFormatFunction;
@@ -51,9 +53,9 @@ function ChartController($scope, $timeout) {
 
     this.addDataLabelsFormatFunction = addDataLabelsFormatFunction;
     this.addTransitionDuration = addTransitionDuration;
-    
-    this.addSubchartOnBrushFunction = addSubchartOnBrushFunction;    
-    this.addOnZoomEndFunction = addOnZoomEndFunction;    
+
+    this.addSubchartOnBrushFunction = addSubchartOnBrushFunction;
+    this.addOnZoomEndFunction = addOnZoomEndFunction;
 
     this.addGauge = addGauge;
     this.addGaugeLabelFormatFunction = addGaugeLabelFormatFunction;
@@ -104,6 +106,7 @@ function ChartController($scope, $timeout) {
         $scope.xsValues = null;
         $scope.xTick = null;
         $scope.yTick = null;
+        $scope.y2Tick = null;
         $scope.names = null;
         $scope.grid = null;
         $scope.legend = null;
@@ -177,19 +180,19 @@ function ChartController($scope, $timeout) {
             config.data.groups = $scope.groups;
         }
         if ($scope.showSubchart && $scope.showSubchart === "true") {
-            config.subchart = {"show": true};
+            config.subchart = { "show": true };
         }
-        if ($scope.subchartOnBrushFunction){
+        if ($scope.subchartOnBrushFunction) {
             config.subchart = config.subchart || {};
             config.subchart.onbrush = $scope.subchartOnBrushFunction;
-        }           
-        if ($scope.enableZoom && $scope.enableZoom === "true") {
-            config.zoom = {"enabled": true};
         }
-        if ($scope.onZoomEndFunction){
+        if ($scope.enableZoom && $scope.enableZoom === "true") {
+            config.zoom = { "enabled": true };
+        }
+        if ($scope.onZoomEndFunction) {
             config.zoom = config.zoom || {};
             config.zoom.onzoomend = $scope.onZoomEndFunction;
-        }          
+        }
         config.axis = config.axis || $scope.axis;
         if ($scope.xTick) {
             config.axis.x.tick = $scope.xTick;
@@ -202,12 +205,20 @@ function ChartController($scope, $timeout) {
         if ($scope.xType) {
             config.axis.x.type = $scope.xType;
         }
+
         if ($scope.yTick) {
             config.axis.y.tick = $scope.yTick;
         }
         if ($scope.yTickFormatFunction) {
             config.axis.y.tick = config.axis.y.tick || {};
             config.axis.y.tick.format = $scope.yTickFormatFunction;
+        }
+        if ($scope.y2Tick) {
+            config.axis.y2.tick = $scope.y2Tick;
+        }
+        if ($scope.y2TickFormatFunction) {
+            config.axis.y2.tick = config.axis.y2.tick || {};
+            config.axis.y2.tick.format = $scope.y2TickFormatFunction;
         }
 
         if ($scope.grid != null) {
@@ -263,7 +274,7 @@ function ChartController($scope, $timeout) {
             if (config.color === undefined) {
                 config.color = {};
             }
-            config.color.threshold = {"values": $scope.colorThresholds};
+            config.color.threshold = { "values": $scope.colorThresholds };
         }
 
         if ($scope.gauge != null) {
@@ -322,23 +333,23 @@ function ChartController($scope, $timeout) {
             config.onresized = $scope.onResized;
         }
         if ($scope.dataOnClick != null) {
-            config.data.onclick = function (data, element) {
-                $scope.$apply(function () {
-                    $scope.dataOnClick({"data": data});
+            config.data.onclick = function(data, element) {
+                $scope.$apply(function() {
+                    $scope.dataOnClick({ "data": data });
                 });
             };
         }
         if ($scope.dataOnMouseover != null) {
-            config.data.onmouseover = function (data) {
-                $scope.$apply(function () {
-                    $scope.dataOnMouseover({"data": data});
+            config.data.onmouseover = function(data) {
+                $scope.$apply(function() {
+                    $scope.dataOnMouseover({ "data": data });
                 });
             };
         }
         if ($scope.dataOnMouseout != null) {
-            config.data.onmouseout = function (data) {
-                $scope.$apply(function () {
-                    $scope.dataOnMouseout({"data": data});
+            config.data.onmouseout = function(data) {
+                $scope.$apply(function() {
+                    $scope.dataOnMouseout({ "data": data });
                 });
             };
         }
@@ -349,7 +360,7 @@ function ChartController($scope, $timeout) {
         $scope.config = config;
 
         if ($scope.chartData && $scope.chartColumns) {
-            $scope.$watch('chartData', function () {
+            $scope.$watch('chartData', function() {
                 loadChartData();
             }, true);
         } else {
@@ -359,8 +370,8 @@ function ChartController($scope, $timeout) {
             }
         }
 
-        $scope.$on('$destroy', function () {
-            $timeout(function () {
+        $scope.$on('$destroy', function() {
+            $timeout(function() {
                 if (angular.isDefined($scope.chart)) {
                     $scope.chart = $scope.chart.destroy();
                     resetVars();
@@ -377,21 +388,21 @@ function ChartController($scope, $timeout) {
     function addYAxis(yAxis) {
         $scope.axes = yAxis;
         if (!$scope.axis.y2) {
-            $scope.axis.y2 = {"show": true};
+            $scope.axis.y2 = { "show": true };
         }
     }
 
     function addDataLabelsFormatFunction(dataLabelsFormatFunction) {
         $scope.dataLabelsFormatFunction = dataLabelsFormatFunction;
     }
-    
+
     function addSubchartOnBrushFunction(subchartOnBrushFunction) {
         $scope.subchartOnBrushFunction = subchartOnBrushFunction;
     }
-    
+
     function addOnZoomEndFunction(onZoomEndFunction) {
         $scope.onZoomEndFunction = onZoomEndFunction;
-    }    
+    }
 
     function addChartCallbackFunction(chartCallbackFunction) {
         $scope.chartCallbackFunction = chartCallbackFunction;
@@ -429,8 +440,17 @@ function ChartController($scope, $timeout) {
         $scope.yTick = tick;
     }
 
+
     function addYTickFormatFunction(yTickFormatFunction) {
         $scope.yTickFormatFunction = yTickFormatFunction;
+    }
+
+    function addY2Tick(tick) {
+        $scope.y2Tick = tick;
+    }
+
+    function addY2TickFormatFunction(y2TickFormatFunction) {
+        $scope.y2TickFormatFunction = y2TickFormatFunction;
     }
 
     function rotateAxis() {
@@ -631,7 +651,7 @@ function ChartController($scope, $timeout) {
         if ($scope.grid == null) {
             $scope.grid = {};
         }
-        $scope.grid["focus"] = {"show": false};
+        $scope.grid["focus"] = { "show": false };
     }
 
     function setXFormat(xFormat) {
@@ -667,7 +687,7 @@ function ChartController($scope, $timeout) {
     function loadChartData() {
         $scope.jsonKeys = {};
         $scope.jsonKeys.value = [];
-        angular.forEach($scope.chartColumns, function (column) {
+        angular.forEach($scope.chartColumns, function(column) {
             $scope.jsonKeys.value.push(column.id);
             addColumnProperties(column.id, column.type, column.name, column.color);
         });

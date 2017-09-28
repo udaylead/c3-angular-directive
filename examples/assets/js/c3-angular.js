@@ -1,4 +1,4 @@
-/*! c3-angular - v1.3.1 - 2017-09-14
+/*! c3-angular - v1.3.1 - 2017-09-28
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1022,30 +1022,26 @@ function C3Chart($timeout) {
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },
-        "template": '<div class="portlet">' +
-            '<div class="portlet-heading">' +
-            '<h3 class="portlet-title text-dark"> {{ title }}</h3>' +
-            '<h5 class="tooltip-show-container text-warning">' +
-            '<div class="portlet-sub-title info-icon-c tool-wrapper tooltio_show_hide">' +
-            '<i class="fa fa-info-circle" aria-hidden="true"></i>' +
-            '</div>' +
-            '<div class="tooltip" ng-bind-html="subtitle"></div>' +
-            '</h5>' +
-            '</div>' +
-            '<div id="bg-default1" class="panel-collapse collapse in">' +
-            '<div class="portlet-body">' +
-            '<h5 class="text-dark total-pageview"> {{callout}}</h5>' +
-            '<div class="text-center" ng-show="showLegend">' +
-            '</div>' +
-            '<div><div id="{{bindto}}"></div><div ng-transclude></div></div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '',
-        "replace": true,
-        "transclude": true,
-        "link": chartLinker
+        "template": '<div class="col-md-12 cards-wrapper">' +
+                    '<div class="cards-heading-wrap">' +
+                    '<div class="cards-title"> {{ title }}</div>' +
+                    '<div class="tooltip-show-container">' +
+                    '<div class="cards-sub-title tooltio_show_hide">' +
+                    '<i class="fa fa-info-circle" aria-hidden="true"></i>' +
+                    '</div>' +
+                    '<div class="tooltip" ng-bind-html="subtitle"></div>' +
+                    '</div>' +
+                    '<div class="cards-total-pageview">{{callout}} &nbsp;</div>' +
+                    '</div>' +
+                    '<div class="cards-graph-wrapper">' +
+                    '<div id="{{bindto}}"></div>' +
+                    '<div ng-transclude></div>' +
+                    '</div>' +
+                    '</div>' +
+                        '',
+                    "replace": true,
+                    "transclude": true,
+                    "link": chartLinker
     };
 }
 angular.module('gridshore.c3js.chart')

@@ -199,23 +199,24 @@ function C3Chart($timeout) {
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },
-        "template": '<div class="col-md-12 cards-wrapper">' +
-                    '<div class="cards-heading-wrap">' +
-                    '<div class="cards-title"> {{ title }}</div>' +
-                    '<div class="tooltip-show-container">' +
-                    '<div class="cards-sub-title tooltio_show_hide">' +
-                    '<i class="fa fa-info-circle" aria-hidden="true"></i>' +
-                    '</div>' +
-                    '<div class="tooltip" ng-bind-html="subtitle"></div>' +
-                    '</div>' +
-                    '<div class="cards-total-pageview">{{callout}} &nbsp;</div>' +
-                    '</div>' +
-                    '<div class="cards-graph-wrapper">' +
-                    '<div id="{{bindto}}"></div>' +
-                    '<div ng-transclude></div>' +
-                    '</div>' +
-                    '</div>' +
-                        '',
+        "template": '<div class="col-md-12 cards-wrapper">\
+                    <div class="cards-heading-wrap"> \
+                    <div class="cards-title"> {{ title }}</div>\
+                    <div class="tooltip-show-container">\
+                    <div class="cards-sub-title tooltio_show_hide">\
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>\
+                    </div>\
+                    <div class="tooltip" ng-bind-html="subtitle"></div>\
+                    </div>\
+                    <div class="cards-total-pageview" ng-if="!callout" style="height:30px;visibility:hidden;">0</div>\
+                    <div class="cards-total-pageview" ng-if="callout">{{callout}}</div>\
+                    </div>\
+                    <div class="cards-graph-wrapper">\
+                    <div id="{{bindto}}"></div>\
+                    <div ng-transclude></div>\
+                    </div>\
+                    </div>\
+                    ',
                     "replace": true,
                     "transclude": true,
                     "link": chartLinker

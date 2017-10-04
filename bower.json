@@ -1,12 +1,14 @@
 {
-  "name": "c3-angular",
-  "version": "1.3.1",
-  "homepage": "https://github.com/jettro/c3-angular-sample",
+  "name": "c3-angular-lc",
+  "version": "2.0.0",
+  "homepage": "https://github.com/udaylead/c3-angular-lc-sample",
   "authors": [
-    "Jettro Coenradie <jettro@gridshore.nl>"
+    "Jettro Coenradie <jettro@gridshore.nl>",
+    "Uday Singh Kushwah <toudaysinghkushwah@gmail.com>",
+    "Mohit Gawande <mgmohitgawande@gmail.com>"
   ],
   "description": "An angularjs directive to integrate c3.js within your angularjs project.",
-  "main": "c3-angular.min.js",
+  "main": "c3-angular-lc.min.js",
   "moduleType": [
     "yui"
   ],

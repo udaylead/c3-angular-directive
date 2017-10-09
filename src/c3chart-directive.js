@@ -158,6 +158,9 @@ function C3Chart($timeout) {
         if (attrs.labelsFormatFunction) {
             chartCtrl.addDataLabelsFormatFunction(scope.labelsFormatFunction());
         }
+        if(attrs.onRenderedFunction){
+            chartCtrl.addOnRenderedFunction(scope.onRenderedFunction());
+        }
         if (attrs.onZoomEndFunction) {
             chartCtrl.addOnZoomEndFunction(scope.onZoomEndFunction());
         }
@@ -189,6 +192,7 @@ function C3Chart($timeout) {
             "bindto": "@bindtoId",
             "showLabels": "@showLabels",
             "labelsFormatFunction": "&",
+            "onRenderedFunction": "&",
             "onZoomEndFunction": "&",
             "showSubchart": "@showSubchart",
             "subchartOnBrushFunction": "&",

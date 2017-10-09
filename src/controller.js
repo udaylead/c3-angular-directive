@@ -52,6 +52,7 @@ function ChartController($scope, $timeout) {
     this.addInitialConfig = addInitialConfig;
 
     this.addDataLabelsFormatFunction = addDataLabelsFormatFunction;
+    this.addOnRenderedFunction=addOnRenderedFunction;
     this.addTransitionDuration = addTransitionDuration;
 
     this.addSubchartOnBrushFunction = addSubchartOnBrushFunction;
@@ -175,6 +176,10 @@ function ChartController($scope, $timeout) {
         if ($scope.dataLabelsFormatFunction) {
             config.data.labels = config.data.labels || {};
             config.data.labels.format = $scope.dataLabelsFormatFunction;
+        }
+        if ($scope.addOnRenderedFunction) {
+            // config.onrendered = config.data.labels || {};
+            config.onrendered = $scope.addOnRenderedFunction;
         }
         if ($scope.groups != null) {
             config.data.groups = $scope.groups;
@@ -395,6 +400,10 @@ function ChartController($scope, $timeout) {
     function addDataLabelsFormatFunction(dataLabelsFormatFunction) {
         $scope.dataLabelsFormatFunction = dataLabelsFormatFunction;
     }
+ 
+     function addOnRenderedFunction(onRenderedFunction){
+        $scope.addOnRenderedFunction=onRenderedFunction;
+     }
 
     function addSubchartOnBrushFunction(subchartOnBrushFunction) {
         $scope.subchartOnBrushFunction = subchartOnBrushFunction;

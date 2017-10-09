@@ -1,4 +1,4 @@
-/*! c3-angular-lc - v2.0.0 - 2017-10-04
+/*! c3-angular-lc - v2.0.0 - 2017-10-09
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -981,6 +981,9 @@ function C3Chart($timeout) {
         if (attrs.labelsFormatFunction) {
             chartCtrl.addDataLabelsFormatFunction(scope.labelsFormatFunction());
         }
+        if(attrs.onRenderedFunction){
+            chartCtrl.addOnRenderedFunction(scope.onRenderedFunction());
+        }
         if (attrs.onZoomEndFunction) {
             chartCtrl.addOnZoomEndFunction(scope.onZoomEndFunction());
         }
@@ -1012,6 +1015,7 @@ function C3Chart($timeout) {
             "bindto": "@bindtoId",
             "showLabels": "@showLabels",
             "labelsFormatFunction": "&",
+            "onRenderedFunction": "&",
             "onZoomEndFunction": "&",
             "showSubchart": "@showSubchart",
             "subchartOnBrushFunction": "&",
@@ -1216,6 +1220,7 @@ function ChartController($scope, $timeout) {
     this.addInitialConfig = addInitialConfig;
 
     this.addDataLabelsFormatFunction = addDataLabelsFormatFunction;
+    this.addOnRenderedFunction=addOnRenderedFunction;
     this.addTransitionDuration = addTransitionDuration;
 
     this.addSubchartOnBrushFunction = addSubchartOnBrushFunction;
@@ -1339,6 +1344,10 @@ function ChartController($scope, $timeout) {
         if ($scope.dataLabelsFormatFunction) {
             config.data.labels = config.data.labels || {};
             config.data.labels.format = $scope.dataLabelsFormatFunction;
+        }
+        if ($scope.addOnRenderedFunction) {
+            // config.onrendered = config.data.labels || {};
+            config.onrendered = $scope.addOnRenderedFunction;
         }
         if ($scope.groups != null) {
             config.data.groups = $scope.groups;
@@ -1559,6 +1568,10 @@ function ChartController($scope, $timeout) {
     function addDataLabelsFormatFunction(dataLabelsFormatFunction) {
         $scope.dataLabelsFormatFunction = dataLabelsFormatFunction;
     }
+ 
+     function addOnRenderedFunction(onRenderedFunction){
+        $scope.addOnRenderedFunction=onRenderedFunction;
+     }
 
     function addSubchartOnBrushFunction(subchartOnBrushFunction) {
         $scope.subchartOnBrushFunction = subchartOnBrushFunction;

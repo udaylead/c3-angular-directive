@@ -1,4 +1,4 @@
-/*! c3-angular-lc - v2.0.0 - 2017-10-09
+/*! c3-angular-lc - v2.0.0 - 2017-10-10
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -2398,8 +2398,14 @@ angular.module('gridshore.c3js.chart')
  */
 function ChartGroup () {
     var groupLinker = function (scope, element, attrs, chartCtrl) {
-        var group = attrs.groupValues.split(",");
-        chartCtrl.addGroup(group);
+        console.log(chartCtrl)
+        attrs.$observe('groupValues', function(value) {
+           var group = value.split(",");
+           if(group.length)
+           chartCtrl.addGroup(group);
+           chartCtrl.showGraph();
+          });
+       
     };
 
     return {

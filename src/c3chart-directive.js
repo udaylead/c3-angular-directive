@@ -179,7 +179,7 @@ function C3Chart($timeout) {
         // Trick to wait for all rendering of the DOM to be finished.
         $timeout(function() {
             chartCtrl.showGraph();
-        });
+        },1000);
     };
 
     return {
@@ -200,6 +200,7 @@ function C3Chart($timeout) {
             "chartData": "=chartData",
             "chartColumns": "=chartColumns",
             "chartX": "=chartX",
+            "groupsVal":"=groupsVal",
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },

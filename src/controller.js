@@ -125,6 +125,11 @@ function ChartController($scope, $timeout) {
     }
 
     function showGraph() {
+        if($scope.groupsVal!=undefined){
+         console.log("show graphppppppppppp");
+            var ggroup=$scope.groupsVal.split(",");
+            addGroup(ggroup);
+        }
         var config = {};
         if ($scope.initialConfig) {
             config = $scope.initialConfig;
@@ -651,7 +656,7 @@ function ChartController($scope, $timeout) {
         }
         $scope.groups.push(group);
     }
-
+    
     function addPoint(point) {
         $scope.point = point;
     }
@@ -709,13 +714,16 @@ function ChartController($scope, $timeout) {
         if ($scope.colors) {
             $scope.config.data.colors = $scope.colors;
         }
+        
+
         if ($scope.groups) {
             $scope.config.data.groups = $scope.groups;
+            console.log("  $scope.config.data.groups",  $scope.config.data.groups);
         }
 
         $scope.config.data.keys = $scope.jsonKeys;
         $scope.config.data.json = $scope.chartData;
-
+        console.log("$scope.config$scope.config",$scope.config);
         if (!$scope.chartIsGenerated) {
             $scope.chart = c3.generate($scope.config);
             $scope.chartIsGenerated = true;

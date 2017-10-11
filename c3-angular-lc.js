@@ -1002,7 +1002,7 @@ function C3Chart($timeout) {
         // Trick to wait for all rendering of the DOM to be finished.
         $timeout(function() {
             chartCtrl.showGraph();
-        });
+        },1000);
     };
 
     return {
@@ -1023,6 +1023,7 @@ function C3Chart($timeout) {
             "chartData": "=chartData",
             "chartColumns": "=chartColumns",
             "chartX": "=chartX",
+            "groupsVal":"=groupsVal",
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },
@@ -1293,6 +1294,11 @@ function ChartController($scope, $timeout) {
     }
 
     function showGraph() {
+        if($scope.groupsVal!=undefined){
+         console.log("show graphppppppppppp");
+            var ggroup=$scope.groupsVal.split(",");
+            addGroup(ggroup);
+        }
         var config = {};
         if ($scope.initialConfig) {
             config = $scope.initialConfig;
@@ -1819,7 +1825,7 @@ function ChartController($scope, $timeout) {
         }
         $scope.groups.push(group);
     }
-
+    
     function addPoint(point) {
         $scope.point = point;
     }
@@ -1877,13 +1883,16 @@ function ChartController($scope, $timeout) {
         if ($scope.colors) {
             $scope.config.data.colors = $scope.colors;
         }
+        
+
         if ($scope.groups) {
             $scope.config.data.groups = $scope.groups;
+            console.log("  $scope.config.data.groups",  $scope.config.data.groups);
         }
 
         $scope.config.data.keys = $scope.jsonKeys;
         $scope.config.data.json = $scope.chartData;
-
+        console.log("$scope.config$scope.config",$scope.config);
         if (!$scope.chartIsGenerated) {
             $scope.chart = c3.generate($scope.config);
             $scope.chartIsGenerated = true;
@@ -2398,11 +2407,10 @@ angular.module('gridshore.c3js.chart')
  */
 function ChartGroup () {
     var groupLinker = function (scope, element, attrs, chartCtrl) {
-        console.log(chartCtrl)
-        attrs.$observe('groupValues', function(value) {
-           var group = value.split(",");
+      
+           var group = attrs.groupValues.split(",");
            chartCtrl.addGroup(group);
-          });
+          
        
     };
 

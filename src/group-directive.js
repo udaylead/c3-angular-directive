@@ -43,13 +43,10 @@ angular.module('gridshore.c3js.chart')
  */
 function ChartGroup () {
     var groupLinker = function (scope, element, attrs, chartCtrl) {
-        console.log(chartCtrl)
-        attrs.$observe('groupValues', function(value) {
-           var group = value.split(",");
-           if(group.length)
+      
+           var group = groupValues.split(",");
            chartCtrl.addGroup(group);
-           chartCtrl.showGraph();
-          });
+          
        
     };
 

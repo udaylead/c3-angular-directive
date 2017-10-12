@@ -1,4 +1,4 @@
-/*! c3-angular-lc - v2.0.0 - 2017-10-11
+/*! c3-angular-lc - v2.0.0 - 2017-10-12
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1002,7 +1002,7 @@ function C3Chart($timeout) {
         // Trick to wait for all rendering of the DOM to be finished.
         $timeout(function() {
             chartCtrl.showGraph();
-        },1000);
+        },1500);
     };
 
     return {

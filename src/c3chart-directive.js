@@ -177,9 +177,24 @@ function C3Chart($timeout) {
             chartCtrl.addInitialConfig(initialConfig);
         }
         // Trick to wait for all rendering of the DOM to be finished.
-        $timeout(function() {
+        if(scope.groupsVal==undefined){
+            $timeout(function() {
             chartCtrl.showGraph();
-        },1500);
+        });
+        }
+        else if(scope.groupsVal!=undefined){
+           var first=true;
+            scope.$watch("groupsVal",function(val){
+                if(val.length>0){
+                   if(first){
+                    $timeout(function() {
+                        first=false;
+                        chartCtrl.showGraph();
+                    });
+                 }
+                }
+            });
+        }
     };
 
     return {
@@ -200,7 +215,7 @@ function C3Chart($timeout) {
             "chartData": "=chartData",
             "chartColumns": "=chartColumns",
             "chartX": "=chartX",
-            "groupsVal":"=groupsVal",
+            "groupsVal":"@groupsVal",
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel"
         },

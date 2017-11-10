@@ -1,4 +1,4 @@
-/*! c3-angular-lc - v2.0.0 - 2017-10-12
+/*! c3-angular-lc - v2.0.0 - 2017-11-10
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2017 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1040,9 +1040,11 @@ function C3Chart($timeout) {
             "chartX": "=chartX",
             "groupsVal":"@groupsVal",
             "callbackFunction": "&",
-            "emptyLabel": "@emptyLabel"
+            "emptyLabel": "@emptyLabel",
+            "showLoader":"="
         },
         "template": '<div class="col-md-12 cards-wrapper">\
+                    <i ng-show="showLoader" class="fa fa-spinner fa-pulse fa-3x fa-fw small-widgt-loader-center"></i>\
                     <div class="cards-heading-wrap"> \
                     <div class="cards-title"> {{ title }}</div>\
                     <div class="tooltip-show-container">\

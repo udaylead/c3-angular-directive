@@ -1044,7 +1044,7 @@ function C3Chart($timeout) {
             "showLoader":"="
         },
         "template": '<div class="col-md-12 cards-wrapper">\
-                    <i ng-show="showLoader" class="fa fa-spinner fa-pulse fa-3x fa-fw small-widgt-loader-center"></i>\
+                    <i ng-show="showLoader" class="fa fa-spinner fa-pulse fa-4x fa-fw small-widgt-loader-center"></i>\
                     <div class="cards-heading-wrap"> \
                     <div class="cards-title"> {{ title }}</div>\
                     <div class="tooltip-show-container">\

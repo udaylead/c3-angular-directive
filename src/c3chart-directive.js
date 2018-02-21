@@ -223,25 +223,27 @@ function C3Chart($timeout) {
             "callOutValue": "@",
         },
         "template": '<div class="col-lg-12 bv-big-widget-inner">\
-                        <div class="bv-big-widget-title-wrap">\
-                            <div class="bv-big-widget-title">\
-                                <span class="bv-big-widget-title-t text-truncate">\
-                                {{ title }}\
-                                </span>\
-                                <div class="bv-big-widget-sub-title" ng-if="callOutText.length>0 && callOutValue.length>0">\
-                                    <span class="bv-big-widget-sub-title-t" ng-bind-html="callOutText"></span>\
-                                    <span class="bv-big-widget-sub-title-v" ng-bind-html="callOutValue"> </span>\
-                                </div>\
-                                <div class="bv-big-widget-sub-title" ng-if="callout.length>0">\
-                                    <span ng-bind-html="callout"> </span>\
-                                </div>\
-                            </div>\
+                    <div class="bv-big-widget-title-wrap">\
+                        <div class="bv-big-widget-title">\
+                            <span class="bv-big-widget-title-t text-truncate">\
+                            {{ title }}\
+                            </span>\
+                            <span class="bv-big-widget-info">\
+                                        <a href="#" data-toggle="tooltip" data-html="true" title="{{subtitle}}">\
+                                            <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>\
+                                        </a>\
+                            </span>\
                         </div>\
-                        <div class="bv-big-widget-graph-wrap">\
-                        <div id="{{bindto}}"></div>\
-                        <div ng-transclude></div>\
+                        <div class="bv-big-widget-sub-title">\
+                            <span class="bv-big-widget-sub-title-t" ng-bind-html="callOutText"></span>\
+                            <span class="bv-big-widget-sub-title-v" ng-bind-html="callOutValue"></span>\
                         </div>\
-                    </div>',
+                    </div>\
+                    <div class="bv-big-widget-graph-wrap">\
+                    <div id="{{bindto}}"></div>\
+                    <div ng-transclude></div>\
+                    </div>\
+                </div>',
                     "replace": true,
                     "transclude": true,
                     "link": chartLinker

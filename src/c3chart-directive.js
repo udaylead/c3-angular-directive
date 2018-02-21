@@ -229,7 +229,7 @@ function C3Chart($timeout) {
                                 {{ title }}\
                                 </span>\
                                 <span class="bv-big-widget-info">\
-                                            <a href="#" data-toggle="tooltip" title="{{subtitle}}">\
+                                            <a href="#" data-toggle="tooltip" data-html="true" title="{{subtitle}}">\
                                                 <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>\
                                             </a>\
                                 </span>\

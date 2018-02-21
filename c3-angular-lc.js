@@ -1059,10 +1059,6 @@ function C3Chart($timeout) {
                                     <span ng-bind-html="callout"> </span>\
                                 </div>\
                             </div>\
-                            <div class="bv-big-widget-sub-title">\
-                                <span class="bv-big-widget-sub-title-t"> {{callOutText}}:&nbsp;</span>\
-                                <span class="bv-big-widget-sub-title-v"> {{callOutValue}} </span>\
-                            </div>\
                         </div>\
                         <div class="bv-big-widget-graph-wrap">\
                         <div id="{{bindto}}"></div>\

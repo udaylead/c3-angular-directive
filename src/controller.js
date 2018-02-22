@@ -370,6 +370,39 @@ function ChartController($scope, $timeout) {
 
         if ($scope.chartData && $scope.chartColumns) {
             $scope.$watch('chartData', function() {
+                if($scope.chartColumns.length>0 && $scope.chart!=null){
+                    var dataCol=[];
+                
+                     // example2
+                    //  console.log($scope.config.bindto);
+                    d3.select('.'+($scope.config.bindto).replace('#','')).insert('div',$scope.config.bindto).attr('class', 'legend').selectAll('div')
+                    .data($scope.chartColumns)
+                    .enter().append('div')
+                    .attr('data-id', function(data) {
+                    return data.id;
+                    })
+                    .html(function(data) {
+                    if(data.name!=undefined)
+                    return '<span></span>'+data.name;
+                    else    
+                    return '<span></span>'+data.id;
+                    })
+                    .each(function(data) {
+                    //d3.select(this).append('span').style
+                    console.log(data.id)
+                    d3.select(this).select('span').style('background-color',  $scope.chart.color(data.id));
+                    })
+                    .on('mouseover', function(data) {
+                        $scope.chart.focus(data.id);
+                    })
+                    .on('mouseout', function(data) {
+                        $scope.chart.revert();
+                    })
+                    .on('click', function(data) {
+                    $(this).toggleClass("c3-legend-item-hidden")
+                    $scope.chart.toggle(data.id);
+                    });
+                }
                 loadChartData();
             }, true);
         } else {

@@ -210,6 +210,7 @@ function C3Chart($timeout) {
             "onRenderedFunction": "&",
             "onZoomEndFunction": "&",
             "showSubchart": "@showSubchart",
+            "showCustomLegend": "@showCustomLegend",
             "subchartOnBrushFunction": "&",
             "enableZoom": "@enableZoom",
             "chartData": "=chartData",

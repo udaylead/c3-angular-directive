@@ -191,6 +191,12 @@ function ChartController($scope, $timeout) {
         if ($scope.showSubchart && $scope.showSubchart === "true") {
             config.subchart = { "show": true };
         }
+        if ($scope.showCustomLegend && $scope.showCustomLegend === "true") {
+            $scope.showCustomLegend=true;
+        }
+        else{
+            $scope.showCustomLegend=false;
+        }
         if ($scope.subchartOnBrushFunction) {
             config.subchart = config.subchart || {};
             config.subchart.onbrush = $scope.subchartOnBrushFunction;
@@ -370,11 +376,13 @@ function ChartController($scope, $timeout) {
 
         if ($scope.chartData && $scope.chartColumns) {
             $scope.$watch('chartData', function() {
-                if($scope.chartColumns.length>0 && $scope.chart!=null){
+                if($scope.chartColumns.length>0 && $scope.chart!=null && $scope.showCustomLegend){
                     var dataCol=[];
                 
                      // example2
                     //  console.log($scope.config.bindto);
+                    if($scope.chartIsGenerated)
+                    d3.select('.'+($scope.config.bindto).replace('#','')).html("");
                     d3.select('.'+($scope.config.bindto).replace('#','')).insert('div',$scope.config.bindto).attr('class', 'legend').selectAll('div')
                     .data($scope.chartColumns)
                     .enter().append('div')

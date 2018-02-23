@@ -241,10 +241,10 @@ function C3Chart($timeout) {
                         </div>\
                     </div>\
                     <div class="bv-big-widget-graph-wrap">\
-                    <div class="{{bindto}}"></div>\
-                    <div id="{{bindto}}"></div>\
-                    <div ng-transclude></div>\
+                        <div id="{{bindto}}"></div>\
+                        <div ng-transclude></div>\
                     </div>\
+                    <div class="bv-big-widget-graph-legend-wrap {{bindto}}">\
                 </div>',
                     "replace": true,
                     "transclude": true,

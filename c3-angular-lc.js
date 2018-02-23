@@ -1,4 +1,4 @@
-/*! c3-angular-lc - v2.0.0 - 2018-02-22
+/*! c3-angular-lc - v2.0.0 - 2018-02-23
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2018 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1064,10 +1064,10 @@ function C3Chart($timeout) {
                         </div>\
                     </div>\
                     <div class="bv-big-widget-graph-wrap">\
-                    <div class="{{bindto}}"></div>\
-                    <div id="{{bindto}}"></div>\
-                    <div ng-transclude></div>\
+                        <div id="{{bindto}}"></div>\
+                        <div ng-transclude></div>\
                     </div>\
+                    <div class="bv-big-widget-graph-legend-wrap {{bindto}}">\
                 </div>',
                     "replace": true,
                     "transclude": true,
@@ -1577,7 +1577,7 @@ function ChartController($scope, $timeout) {
                     //  console.log($scope.config.bindto);
                     if($scope.chartIsGenerated)
                     d3.select('.'+($scope.config.bindto).replace('#','')).html("");
-                    d3.select('.'+($scope.config.bindto).replace('#','')).insert('div',$scope.config.bindto).attr('class', 'legend').selectAll('div')
+                    d3.select('.'+($scope.config.bindto).replace('#','')).selectAll('div')
                     .data($scope.chartColumns)
                     .enter().append('div')
                     .attr('data-id', function(data) {
@@ -1585,9 +1585,9 @@ function ChartController($scope, $timeout) {
                     })
                     .html(function(data) {
                     if(data.name!=undefined)
-                    return '<span></span>'+data.name;
+                    return '<span class="bv-graph-legend-color"></span><span>'+data.name+'</span>';
                     else    
-                    return '<span></span>'+data.id;
+                    return '<span class="bv-graph-legend-color"></span><span>'+data.id+'</span>';
                     })
                     .each(function(data) {
                     //d3.select(this).append('span').style

@@ -1,4 +1,4 @@
-/*! c3-angular-lc - v2.0.0 - 2018-02-23
+/*! c3-angular-lc - v2.0.0 - 2018-02-27
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2018 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1053,7 +1053,7 @@ function C3Chart($timeout) {
                             {{ title }}\
                             </span>\
                             <span class="bv-big-widget-info">\
-                                        <a href="#" data-toggle="tooltip" data-html="true" title="{{subtitle}}">\
+                                        <a  data-toggle="tooltip" data-html="true" title="{{subtitle}}">\
                                             <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>\
                                         </a>\
                             </span>\

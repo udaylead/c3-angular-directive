@@ -1,6 +1,6 @@
 angular.module('gridshore.c3js.chart')
-    .directive('c3chart', ['$timeout', function(timeout) {
-        return C3Chart(timeout);
+    .directive('c3chart', ['$timeout','$sce', function(timeout,$sce) {
+        return C3Chart(timeout,$sce);
     }]);
 
 /**
@@ -130,7 +130,7 @@ angular.module('gridshore.c3js.chart')
  *       $scope.theChart.flush();
  *   };
  */
-function C3Chart($timeout) {
+function C3Chart($timeout, $sce) {
     var chartLinker = function(scope, element, attrs, chartCtrl) {
         var paddingTop = attrs.paddingTop;
         var paddingRight = attrs.paddingRight;
@@ -176,6 +176,9 @@ function C3Chart($timeout) {
         if (initialConfig) {
             chartCtrl.addInitialConfig(initialConfig);
         }
+        scope.trustAsHtml = function(string) {
+            return $sce.trustAsHtml(string);
+        };
         // Trick to wait for all rendering of the DOM to be finished.
         if(scope.groupsVal==undefined){
             $timeout(function() {
@@ -236,8 +239,8 @@ function C3Chart($timeout) {
                             </span>\
                         </div>\
                         <div class="bv-big-widget-sub-title">\
-                            <span class="bv-big-widget-sub-title-t" ng-bind-html="callOutText"></span>\
-                            <span class="bv-big-widget-sub-title-v" ng-bind-html="callOutValue"></span>\
+                        <span class="bv-big-widget-sub-title-t" data-ng-bind-html="trustAsHtml(callOutText)"></span>\
+                        <span class="bv-big-widget-sub-title-v" data-ng-bind-html="trustAsHtml(callOutValue)"></span>\
                         </div>\
                     </div>\
                     <div class="bv-big-widget-graph-wrap">\

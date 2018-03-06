@@ -226,29 +226,32 @@ function C3Chart($timeout, $sce) {
             "callOutText": "@",
             "callOutValue": "@",
         },
-        "template": '<div class="col-lg-12 bv-big-widget-inner">\
-                    <div class="bv-big-widget-title-wrap">\
-                        <div class="bv-big-widget-title">\
-                            <span class="bv-big-widget-title-t text-truncate">\
-                            {{ title }}\
-                            </span>\
-                            <span class="bv-big-widget-info">\
-                                        <a  data-toggle="tooltip" data-html="true" title="{{subtitle}}">\
-                                            <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>\
-                                        </a>\
-                            </span>\
-                        </div>\
-                        <div class="bv-big-widget-sub-title">\
-                        <span class="bv-big-widget-sub-title-t" data-ng-bind-html="trustAsHtml(callOutText)"></span>\
-                        <span class="bv-big-widget-sub-title-v" data-ng-bind-html="trustAsHtml(callOutValue)"></span>\
-                        </div>\
-                    </div>\
-                    <div class="bv-big-widget-graph-wrap">\
-                        <div id="{{bindto}}"></div>\
-                        <div ng-transclude></div>\
-                    </div>\
-                    <div class="bv-big-widget-graph-legend-wrap {{bindto}}">\
-                </div>',
+        "template": `<div class="col-lg-12 bv-big-widget-inner">
+                        <div class="bv-big-widget-title-wrap">
+                            <div class="bv-big-widget-title">
+                                <span class="bv-big-widget-title-t text-truncate">
+                                {{ title }}
+                                </span>
+                                <span class="bv-big-widget-info">
+                                            <a  data-toggle="tooltip" data-html="true" title="{{subtitle}}">
+                                                <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>
+                                            </a>
+                                </span>
+                            </div>
+                            <div class="bv-big-widget-sub-title">
+                            <span class="bv-big-widget-sub-title-t" data-ng-bind-html="trustAsHtml(callOutText)"></span>
+                            <span class="bv-big-widget-sub-title-v" data-ng-bind-html="trustAsHtml(callOutValue)"></span>
+                            </div>
+                        </div>
+                        <div class="bv-big-widget-graph-wrap" ng-show="chartData.length==0">
+                            <img ng-show="chartData.length==0" class="center-img-div" src="common/images/nodata.png">
+                        </div>
+                        <div class="bv-big-widget-graph-wrap" ng-style="{display: chartData.length>0? 'static':'none'}">
+                            <div id="{{bindto}}"></div>
+                            <div ng-transclude></div>
+                        </div>
+                        <div class="bv-big-widget-graph-legend-wrap {{bindto}}">
+                    </div>`,
                     "replace": true,
                     "transclude": true,
                     "link": chartLinker

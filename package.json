@@ -35,6 +35,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-devserver": "^0.6.0",
     "grunt-jsdoc": "^0.6.7",
-    "jsdoc": "^3.3.2"
+    "jsdoc": "^3.3.2",
+    "babel-preset-es2015": "^6.24.1",
+    "grunt-babel": "^6.0.0"
   }
 }

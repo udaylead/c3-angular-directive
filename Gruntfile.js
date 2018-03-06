@@ -71,6 +71,22 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        babel: {
+            options: {
+               presets: ['es2015']
+            },
+            dist: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '.',
+                        src: ['<%= pkg.name %>.js'],
+                        dest: './',
+                        ext : '.js'
+                    }
+                ]
+            }
+        },
         devserver: {
             options: {
                 base: 'examples',
@@ -99,6 +115,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-devserver');
     grunt.loadNpmTasks('grunt-jsdoc');
+    grunt.loadNpmTasks('babel-preset-es2015');
+    grunt.loadNpmTasks('grunt-babel');
 
-    grunt.registerTask('default', ['concat:dist', 'uglify:dist', 'copy:examples']);
+    grunt.registerTask('default', ['concat:dist',"babel",'uglify:dist', 'copy:examples']);
 };

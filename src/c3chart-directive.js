@@ -225,25 +225,34 @@ function C3Chart($timeout, $sce) {
             "showLoader":"=",
             "callOutText": "@",
             "callOutValue": "@",
+            "graphType":"@"
         },
         "template": `<div class="col-lg-12 bv-big-widget-inner">
                         <div class="bv-big-widget-title-wrap">
                             <div class="bv-big-widget-title">
-                                <span class="bv-big-widget-title-t text-truncate">
-                                {{ title }}
-                                </span>
+                                <span class="bv-big-widget-title-t text-truncate graph-title-skelton" ng-show="showLoader"></span>
+                                <span class="bv-big-widget-title-t text-truncate" ng-show="!showLoader">{{ title }}</span>
                                 <span class="bv-big-widget-info">
                                             <a  data-toggle="tooltip" data-html="true" title="{{subtitle}}">
                                                 <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>
                                             </a>
                                 </span>
                             </div>
-                            <div class="bv-big-widget-sub-title">
-                            <span class="bv-big-widget-sub-title-t" data-ng-bind-html="trustAsHtml(callOutText)"></span>
-                            <span class="bv-big-widget-sub-title-v" data-ng-bind-html="trustAsHtml(callOutValue)"></span>
+                            <div class="bv-big-widget-sub-title" ng-show="!showLoader">
+                                <span class="bv-big-widget-sub-title-t" data-ng-bind-html="trustAsHtml(callOutText)"></span>
+                                <span class="bv-big-widget-sub-title-v" data-ng-bind-html="trustAsHtml(callOutValue)"></span>
+                            </div>
+                             <div class="bv-big-widget-sub-title" ng-show="showLoader">
+                                <span class="bv-big-widget-sub-title-t graph-callout-title-skelton"></span>
+                                <span class="bv-big-widget-sub-title-v graph-callout-value-skelton"></span>
                             </div>
                         </div>
-                        <div class="bv-big-widget-graph-wrap" ng-show="chartData.length==0">
+                        <div class="bv-big-widget-graph-wrap" ng-show="showLoader && graphType=='bar'">
+                            <span class="bv-big-widget-sub-title-t graph-bar1-skelton"></span>
+                            <span class="bv-big-widget-sub-title-t graph-bar2-skelton"></span>
+                            <span class="bv-big-widget-sub-title-t graph-bar3-skelton"></span>
+                        </div>
+                        <div class="bv-big-widget-graph-wrap" ng-show="!showLoader && chartData.length==0">
                             <img ng-show="chartData.length==0" class="center-img-div" src="common/images/nodata.png">
                         </div>
                         <div class="bv-big-widget-graph-wrap" ng-style="{display: chartData.length>0? 'static':'none'}">

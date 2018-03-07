@@ -247,6 +247,22 @@ function C3Chart($timeout, $sce) {
                                 <span class="bv-big-widget-sub-title-v graph-callout-value-skelton"></span>
                             </div>
                         </div>
+                        <div class="bv-big-widget-graph-wrap" ng-show="showLoader && graphType=='barcombined'">
+                                <span class="bv-big-widget-sub-title-t graph-bar1-combined-skelton"></span>
+                                <span class="bv-big-widget-sub-title-t graph-bar2-combined-skelton"></span>
+                                <span class="bv-big-widget-sub-title-t graph-bar3-combined-skelton"></span>
+
+                                <span class="bv-big-widget-sub-title-t graph-bar1-combined-skelton"></span>
+                                <span class="bv-big-widget-sub-title-t graph-bar2-combined-skelton"></span>
+                                <span class="bv-big-widget-sub-title-t graph-bar3-combined-skelton"></span>
+                                
+                                <span class="bv-big-widget-sub-title-t graph-bar1-combined-skelton"></span>
+                                <span class="bv-big-widget-sub-title-t graph-bar2-combined-skelton"></span>
+                                <span class="bv-big-widget-sub-title-t graph-bar3-combined-skelton"></span>
+                        </div>
+                        <div class="bv-big-widget-graph-wrap" ng-show="showLoader && graphType=='donut'">
+                            <span class="doughnut"></span>
+                        </div>
                         <div class="bv-big-widget-graph-wrap" ng-show="showLoader && graphType=='bar'">
                             <span class="bv-big-widget-sub-title-t graph-bar1-skelton"></span>
                             <span class="bv-big-widget-sub-title-t graph-bar2-skelton"></span>
@@ -256,6 +272,7 @@ function C3Chart($timeout, $sce) {
                             <img ng-show="chartData.length==0" class="center-img-div" src="common/images/nodata.png">
                         </div>
                         <div class="bv-big-widget-graph-wrap" ng-style="{display: chartData.length>0? 'static':'none'}">
+                        
                             <div id="{{bindto}}"></div>
                             <div ng-transclude></div>
                         </div>

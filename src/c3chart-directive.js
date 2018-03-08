@@ -276,7 +276,35 @@ function C3Chart($timeout, $sce) {
                             <div id="{{bindto}}"></div>
                             <div ng-transclude></div>
                         </div>
-                        <div class="bv-big-widget-graph-legend-wrap {{bindto}}">
+                        <div class="bv-big-widget-graph-legend-wrap {{bindto}}" ng-show="!showLoader"></div>
+                        <div class="bv-big-widget-graph-legend-wrap" ng-show="showLoader && graphType=='bar'">
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                        </div>
+                        <div class="bv-big-widget-graph-legend-wrap" ng-show="showLoader && (graphType=='barcombined' ||graphType=='donut')">
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                            <span class="circle-legend-skelton"></span>
+                            <span class="legend-skelton"></span>
+                        </div>
                     </div>`,
                     "replace": true,
                     "transclude": true,

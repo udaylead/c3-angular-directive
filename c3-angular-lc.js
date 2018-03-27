@@ -1,6 +1,6 @@
 'use strict';
 
-/*! c3-angular-lc - v2.0.0 - 2018-03-08
+/*! c3-angular-lc - v2.0.0 - 2018-03-27
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2018 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1556,6 +1556,8 @@ function ChartController($scope, $timeout) {
                         $(this).toggleClass("c3-legend-item-hidden");
                         $scope.chart.toggle(data.id);
                     });
+                } else if ($scope.chartData.length == 0) {
+                    d3.select('.' + $scope.config.bindto.replace('#', '')).html("");
                 }
                 loadChartData();
             }, true);

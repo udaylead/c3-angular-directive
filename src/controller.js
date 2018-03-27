@@ -411,6 +411,9 @@ function ChartController($scope, $timeout) {
                     $scope.chart.toggle(data.id);
                     });
                 }
+                else if($scope.chartData.length==0){
+                    d3.select('.' + $scope.config.bindto.replace('#', '')).html("");
+                }
                 loadChartData();
             }, true);
         } else {

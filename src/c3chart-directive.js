@@ -223,6 +223,7 @@ function C3Chart($timeout, $sce) {
             "callbackFunction": "&",
             "emptyLabel": "@emptyLabel",
             "showLoader":"=",
+            "error":"=",
             "callOutText": "@",
             "callOutValue": "@",
             "graphType":"@"
@@ -269,8 +270,20 @@ function C3Chart($timeout, $sce) {
                             <span class="bv-big-widget-sub-title-t graph-bar3-skelton"></span>
                         </div>
                         <div class="bv-big-widget-graph-wrap" ng-show="!showLoader && chartData.length==0">
-                            <img ng-show="chartData.length==0" class="center-img-div" src="common/images/nodata.png">
+                           <div class="bv-error-image-con center-img-div" ng-show="!error">
+                                <div class="error-img-wrap">
+                                    <img src="common/images/nodata1.png">
+                                </div>
+                                <span class="bv-no-data-error"> No data available</span>
+                            </div>
+                            <div class="bv-error-image-con center-img-div" ng-show="error">
+                                <div class="error-img-wrap">
+                                    <i class="fas fa-exclamation-triangle bv-ex-tri-cus"></i>
+                                </div>
+                                <span class="bv-no-data-error"> Oops something wrong</span>
+                            </div>
                         </div>
+                        
                         <div class="bv-big-widget-graph-wrap" ng-style="{display: chartData.length>0? 'static':'none'}">
                         
                             <div id="{{bindto}}"></div>

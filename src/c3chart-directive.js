@@ -235,7 +235,7 @@ function C3Chart($timeout, $sce) {
                                 <span class="bv-big-widget-title-t text-truncate" ng-show="!showLoader">{{ title }}</span>
                                 <span class="bv-big-widget-info">
                                             <a  data-toggle="tooltip" data-html="true" title="{{subtitle}}">
-                                                <img style="float:right;" src="common/images/Info-Icon.png" alt="info icon"/>
+                                                <img style="float:right;" src="common/images/Info-Icon.svg" alt="info icon"/>
                                             </a>
                                 </span>
                             </div>

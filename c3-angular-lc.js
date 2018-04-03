@@ -1,6 +1,6 @@
 'use strict';
 
-/*! c3-angular-lc - v2.0.0 - 2018-04-02
+/*! c3-angular-lc - v2.0.0 - 2018-04-03
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2018 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1535,12 +1535,15 @@ function ChartController($scope, $timeout) {
 
         if ($scope.chartData && $scope.chartColumns) {
             $scope.$watch('chartData', function () {
-                if ($scope.chartColumns.length > 0 && $scope.chart != null && $scope.showCustomLegend) {
+
+                loadChartData();
+                if ($scope.chartColumns.length > 0 && $scope.chart != null && $scope.showCustomLegend && $scope.chartIsGenerated) {
                     var dataCol = [];
 
                     // example2
                     //  console.log($scope.config.bindto);
-                    if ($scope.chartIsGenerated) d3.select('.' + $scope.config.bindto.replace('#', '')).html("");
+
+                    d3.select('.' + $scope.config.bindto.replace('#', '')).html("");
                     d3.select('.' + $scope.config.bindto.replace('#', '')).selectAll('div').data($scope.chartColumns).enter().append('div').attr('data-id', function (data) {
                         return data.id;
                     }).html(function (data) {
@@ -1560,7 +1563,6 @@ function ChartController($scope, $timeout) {
                 } else if ($scope.chartData.length == 0) {
                     d3.select('.' + $scope.config.bindto.replace('#', '')).html("");
                 }
-                loadChartData();
             }, true);
         } else {
             $scope.chart = c3.generate($scope.config);

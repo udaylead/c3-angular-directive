@@ -376,12 +376,14 @@ function ChartController($scope, $timeout) {
 
         if ($scope.chartData && $scope.chartColumns) {
             $scope.$watch('chartData', function() {
-                if($scope.chartColumns.length>0 && $scope.chart!=null && $scope.showCustomLegend){
+
+                loadChartData();
+                if($scope.chartColumns.length>0 && $scope.chart!=null && $scope.showCustomLegend && $scope.chartIsGenerated){
                     var dataCol=[];
                 
                      // example2
                     //  console.log($scope.config.bindto);
-                    if($scope.chartIsGenerated)
+                 
                     d3.select('.'+($scope.config.bindto).replace('#','')).html("");
                     d3.select('.'+($scope.config.bindto).replace('#','')).selectAll('div')
                     .data($scope.chartColumns)
@@ -414,7 +416,6 @@ function ChartController($scope, $timeout) {
                 else if($scope.chartData.length==0){
                     d3.select('.' + $scope.config.bindto.replace('#', '')).html("");
                 }
-                loadChartData();
             }, true);
         } else {
             $scope.chart = c3.generate($scope.config);

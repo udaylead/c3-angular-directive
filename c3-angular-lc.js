@@ -1,6 +1,6 @@
 'use strict';
 
-/*! c3-angular-lc - v2.0.0 - 2018-04-03
+/*! c3-angular-lc - v2.0.0 - 2018-04-05
 * https://github.com/jettro/c3-angular-directive
 * Copyright (c) 2018 ; Licensed  */
 angular.module('gridshore.c3js.chart', []);
@@ -1551,7 +1551,7 @@ function ChartController($scope, $timeout) {
                     }).each(function (data) {
                         //d3.select(this).append('span').style
                         console.log(data.id);
-                        d3.select(this).select('span').style('background-color', $scope.chart.color(data.id));
+                        if (data.id != undefined) d3.select(this).select('span').style('background-color', $scope.chart.color(data.id));
                     }).on('mouseover', function (data) {
                         $scope.chart.focus(data.id);
                     }).on('mouseout', function (data) {

@@ -400,6 +400,7 @@ function ChartController($scope, $timeout) {
                     .each(function(data) {
                     //d3.select(this).append('span').style
                     console.log(data.id)
+                    if(data.id!=undefined)
                     d3.select(this).select('span').style('background-color',  $scope.chart.color(data.id));
                     })
                     .on('mouseover', function(data) {
